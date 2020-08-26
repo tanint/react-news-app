@@ -5,7 +5,7 @@ import { usePosts } from '@/features/posts/services'
 import { SeoTags } from '@/lib/Seo'
 
 function Home() {
-  const { data: posts, status } = usePosts()
+  const { data: posts, status } = usePosts({ section: 'news' })
 
   return (
     <PageWrapper>
@@ -17,7 +17,7 @@ function Home() {
         ) : (
           <div>
             {posts.map((post) => (
-              <div key={post.id}>{post.title}</div>
+              <div key={post.id}>{post.webTitle}</div>
             ))}
           </div>
         )}
