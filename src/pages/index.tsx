@@ -2,20 +2,25 @@ import React from 'react'
 
 import { PageWrapper } from '@/lib/page'
 import { usePosts } from '@/features/posts/services'
+import { SeoTags } from '@/lib/Seo'
 
 function Home() {
   const { data: posts, status } = usePosts()
 
-  if (status === 'loading') {
-    return <div>Loading...</div>
-  }
-
   return (
     <PageWrapper>
+      <SeoTags title="Home" />
+
       <div>
-        {posts.map((post) => {
-          return <div key={post.id}>{post.title}</div>
-        })}
+        {status === 'loading' ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            {posts.map((post) => (
+              <div key={post.id}>{post.title}</div>
+            ))}
+          </div>
+        )}
       </div>
     </PageWrapper>
   )
