@@ -1,11 +1,14 @@
 import React from 'react'
 
 import { PageWrapper } from '@/lib/page'
-import { usePosts } from '@/features/posts/services'
+import { useQueryTopStories } from '@/features/topStories/services'
 import { SeoTags } from '@/lib/Seo'
 
 function Home() {
-  const { data: posts, status } = usePosts({ section: 'news' })
+  const { data: posts, status } = useQueryTopStories({
+    section: 'news',
+    limit: 8,
+  })
 
   return (
     <PageWrapper>
