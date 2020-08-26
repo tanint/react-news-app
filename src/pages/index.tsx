@@ -20,7 +20,10 @@ function Home() {
         ) : (
           <div>
             {posts.map((post) => (
-              <div key={post.id}>{post.webTitle}</div>
+              <div key={post.id} css={{ marginBottom: '20px' }}>
+                <div css={{ fontWeight: 700 }}>{post.title}</div>
+                <div>{post.body}</div>
+              </div>
             ))}
           </div>
         )}

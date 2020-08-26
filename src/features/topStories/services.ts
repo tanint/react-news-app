@@ -1,5 +1,6 @@
 import { get } from 'lodash'
 import { useQuery } from 'react-query'
+import sanitizeHtml from 'sanitize-html'
 
 import { fetchAPI } from '@/lib/api'
 
@@ -18,7 +19,16 @@ export const getTopStories = async (_, options: OptionsType) => {
     },
   })
 
-  return get(data, 'response.results', [])
+  return get(data, 'response.results', []).map((post) => {
+    return {
+      title: post.webTitle,
+      body: sanitizeHtml(post.fields?.body, {
+        allowedTags: [],
+        allowedAttributes: {},
+        textFilter: (text) => text.replace('• ', ''),
+      }),
+    }
+  })
 }
 
 export function useQueryTopStories(options: OptionsType) {
