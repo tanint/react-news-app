@@ -2,6 +2,7 @@ import React from 'react'
 
 import { PageWrapper } from '@/lib/page'
 import { useQueryTopStories } from '@/features/topStories/services'
+import { List } from '@/features/topStories'
 import { SeoTags } from '@/lib/Seo'
 
 function Home() {
@@ -15,18 +16,7 @@ function Home() {
       <SeoTags title="Home" />
 
       <div>
-        {status === 'loading' ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            {posts.map((post) => (
-              <div key={post.id} css={{ marginBottom: '20px' }}>
-                <div css={{ fontWeight: 700 }}>{post.title}</div>
-                <div>{post.body}</div>
-              </div>
-            ))}
-          </div>
-        )}
+        {status === 'loading' ? <div>Loading...</div> : <List posts={posts} />}
       </div>
     </PageWrapper>
   )

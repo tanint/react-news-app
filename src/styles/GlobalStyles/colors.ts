@@ -3,7 +3,7 @@ import { css } from '@emotion/core'
 export default css`
   :root {
     --color-primary-light: #528bf4;
-    --color-primary: #276ef1;
+    --color-primary: #0f3674;
     --color-primary-dark: #174eb6;
 
     --color-gray-light: #f7f7f7;
