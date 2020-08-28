@@ -5,7 +5,13 @@ import NewsCard from './NewsCard'
 import NewsContent from './NewsContent'
 
 export const Overview = () => {
-  return <NewsCard title={mockPost.title} description={mockPost.body} />
+  return (
+    <NewsCard
+      title={mockPost.title}
+      description={mockPost.body}
+      thumbnail={mockPost.thumbnail}
+    />
+  )
 }
 
 export const NoDescription = () => {
