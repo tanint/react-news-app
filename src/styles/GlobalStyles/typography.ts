@@ -29,11 +29,6 @@ export default css`
   a {
     color: var(--color-primary);
     text-decoration: none;
-
-    &:hover {
-      color: var(--color-primary-dark);
-      text-decoration: underline;
-    }
   }
 
   mark {

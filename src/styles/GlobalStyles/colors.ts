@@ -2,7 +2,7 @@ import { css } from '@emotion/core'
 
 export default css`
   :root {
-    --color-primary-light: #528bf4;
+    --color-primary-light: #1b3f83;
     --color-primary: #0f3674;
     --color-primary-dark: #174eb6;
 
@@ -13,5 +13,10 @@ export default css`
     --color-negative-bg: #fdf0ef;
     --color-negative-border: #f4afa7;
     --color-negative: #e54937;
+
+    --color-news: #388e3c;
+    --color-sport: #f50057;
+    --color-culture: #ffca28;
+    --color-lifeandstyle: #2196f3;
   }
 `

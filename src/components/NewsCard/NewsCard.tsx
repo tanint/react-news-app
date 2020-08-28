@@ -14,7 +14,7 @@ function NewsCard(props: NewsCardProps) {
         {thumbnail ? (
           <Image src={thumbnail} />
         ) : (
-          <Image src="https://media.guim.co.uk/097ac43a4f593084f5481c1e76522e33176065d8/0_175_2949_1769/500.jpg" />
+          <Image src="/images/default-thumbnail.jpg" />
         )}
       </RatioBoxFloating>
       <FloatingContent>

@@ -13,6 +13,6 @@ export default css`
     --space8: calc(2 * var(--space-unit));
     --space10: calc(2.5 * var(--space-unit));
 
-    --width-container: 1150px;
+    --width-container: 1160px;
   }
 `
