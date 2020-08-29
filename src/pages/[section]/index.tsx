@@ -9,6 +9,7 @@ import { SeoTags } from '@/lib/Seo'
 function Section() {
   const { query } = useRouter()
 
+  console.log('router', query)
   const { data: posts, status } = useQueryTopStories({
     section: query.section as string,
     limit: 9,

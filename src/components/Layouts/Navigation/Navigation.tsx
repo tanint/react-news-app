@@ -28,7 +28,7 @@ function Navigation() {
           return (
             <Link
               key={menu.slug}
-              href="[section]"
+              href="/[section]"
               as={`/${menu.slug}`}
               passHref
             >

@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 import { NewsCard } from '@/components/NewsCard'
 
@@ -14,12 +15,15 @@ function List(props) {
       }}
     >
       {posts.map((post) => (
-        <NewsCard
-          key={post.id}
-          title={post.title}
-          thumbnail={post.thumbnail}
-          description={post.body}
-        />
+        <Link key={post.id} href="/[section]/[...all]" as={`/${post.id}`}>
+          <a>
+            <NewsCard
+              title={post.title}
+              thumbnail={post.thumbnail}
+              description={post.body}
+            />
+          </a>
+        </Link>
       ))}
     </div>
   )

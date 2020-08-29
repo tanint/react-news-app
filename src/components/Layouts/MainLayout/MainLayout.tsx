@@ -1,4 +1,5 @@
-import React, { Fragment, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
+import styled from '@emotion/styled'
 
 import { Container } from '@/components/uikit'
 import { Header } from '../Header'
@@ -9,9 +10,11 @@ interface MainLayoutProps {
 
 function MainLayout(props: MainLayoutProps) {
   return (
-    <Fragment>
+    <Grid>
       <Header />
-      <Container>{props.children}</Container>
+      <div>
+        <Container>{props.children}</Container>
+      </div>
       <div
         css={{
           backgroundColor: 'var(--color-primary)',
@@ -19,8 +22,14 @@ function MainLayout(props: MainLayoutProps) {
           marginTop: 'var(--space10)',
         }}
       ></div>
-    </Fragment>
+    </Grid>
   )
 }
+
+const Grid = styled.div`
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+`
 
 export default MainLayout
