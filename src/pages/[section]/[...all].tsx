@@ -9,12 +9,13 @@ import { SeoTags } from '@/lib/Seo'
 
 function Content() {
   const { asPath, query } = useRouter()
-
-  const { data, status } = useQuery(
-    ['singleContent', { contentId: asPath }],
-    getSingleContent,
-    { enabled: !isEmpty(query) },
-  )
+  const { data, status } = useQuery({
+    queryKey: [asPath],
+    queryFn: getSingleContent,
+    config: {
+      enabled: !isEmpty(query),
+    },
+  })
 
   const isLoading = status !== 'success'
 

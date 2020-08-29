@@ -1,14 +1,20 @@
 import React from 'react'
+import { useQuery } from 'react-query'
 
 import { PageWrapper } from '@/lib/page'
-import { useQueryTopStories } from '@/features/topStories/services'
+import { getTopStories } from '@/features/topStories'
 import { List } from '@/features/topStories'
 import { SeoTags } from '@/lib/Seo'
 
 function Home() {
-  const { data: posts, status } = useQueryTopStories({
-    section: 'news',
-    limit: 8,
+  const { data: posts, status } = useQuery({
+    queryKey: [
+      'news',
+      {
+        limit: 8,
+      },
+    ],
+    queryFn: getTopStories,
   })
 
   return (

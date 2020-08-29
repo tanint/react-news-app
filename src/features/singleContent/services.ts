@@ -2,13 +2,9 @@ import { get } from 'lodash'
 import sanitizeHtml from 'sanitize-html'
 import { fetchAPI } from '@/lib/api'
 
-type OptionsType = {
-  contentId: string
-}
-
-export const getSingleContent = async (_, apiOptions: OptionsType) => {
+export const getSingleContent = async (contentId) => {
   const { data } = await fetchAPI({
-    path: `/${apiOptions.contentId}`,
+    path: `/${contentId}`,
     params: {
       'show-fields': 'body,headline',
       shouldHideAdverts: 'true',

@@ -8,11 +8,11 @@ type OptionsType = {
   limit: number
 }
 
-export const getTopStories = async (_, options: OptionsType) => {
+export const getTopStories = async (section, options: OptionsType) => {
   const { data } = await fetchAPI({
     path: '/search',
     params: {
-      section: options.section,
+      section,
       'page-size': options.limit,
       'show-fields': 'bodyText,thumbnail',
     },

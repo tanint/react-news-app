@@ -1,18 +1,27 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import { useQuery } from 'react-query'
+import { isEmpty } from 'lodash'
 
 import { PageWrapper } from '@/lib/page'
-import { useQueryTopStories } from '@/features/topStories/services'
+import { getTopStories } from '@/features/topStories'
 import { List } from '@/features/topStories'
 import { SeoTags } from '@/lib/Seo'
 
 function Section() {
   const { query } = useRouter()
 
-  console.log('router', query)
-  const { data: posts, status } = useQueryTopStories({
-    section: query.section as string,
-    limit: 9,
+  const { data: posts, status } = useQuery({
+    queryKey: [
+      query.section,
+      {
+        limit: 9,
+      },
+    ],
+    queryFn: getTopStories,
+    config: {
+      enabled: !isEmpty(query),
+    },
   })
 
   return (
