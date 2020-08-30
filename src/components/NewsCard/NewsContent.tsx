@@ -4,10 +4,10 @@ import styled from '@emotion/styled'
 import { NewsContentProps } from './types'
 
 function NewsContent(props: NewsContentProps) {
-  const { title, description } = props
-
+  const { title, description, section } = props
+  console.log('section', section)
   return (
-    <Content>
+    <Content className={section}>
       <Title>{title}</Title>
       {description && <Desc>{description}</Desc>}
     </Content>
@@ -17,6 +17,20 @@ function NewsContent(props: NewsContentProps) {
 const Content = styled.div`
   background-color: rgba(9, 53, 123, 0.9);
   padding: var(--space4);
+  border-bottom: 3px solid var(--color-primary);
+
+  &.news {
+    border-color: var(--color-news);
+  }
+  &.sport {
+    border-color: var(--color-sport);
+  }
+  &.culture {
+    border-color: var(--color-culture);
+  }
+  &.lifeandstyle {
+    border-color: var(--color-lifeandstyle);
+  }
 `
 
 const Title = styled.h2`

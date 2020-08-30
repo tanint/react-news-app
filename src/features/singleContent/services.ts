@@ -71,6 +71,7 @@ const sanitizeContent = (html) => {
       iframe: ['src'],
       figure: ['class'],
       img: ['src'],
+      a: ['href'],
     },
   })
 }

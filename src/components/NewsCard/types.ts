@@ -1,5 +1,6 @@
 export type NewsContentProps = {
   title: string
+  section: string
   description?: string
 }
 

@@ -21,6 +21,7 @@ function List(props) {
               title={post.title}
               thumbnail={post.thumbnail}
               description={post.body}
+              section={post.section}
             />
           </a>
         </Link>

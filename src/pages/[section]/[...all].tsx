@@ -61,7 +61,16 @@ function Content() {
               {data.title}
             </h1>
             {data.headline !== data.title && (
-              <div css={{ margin: '20px 0' }}>{data.headline}</div>
+              <div
+                css={{
+                  margin: '20px 0',
+                  fontSize: '22px',
+                  fontWeight: 700,
+                  fontFamily: 'Georgia,serif',
+                }}
+              >
+                {data.headline}
+              </div>
             )}
           </div>
           <ContentBox dangerouslySetInnerHTML={{ __html: data.body }} />
@@ -78,6 +87,7 @@ const ContentBox = styled.div`
 
   p {
     margin-bottom: var(--space6);
+    line-height: 1.4;
   }
 
   figure.element {

@@ -10,16 +10,17 @@ export const Overview = () => {
       title={mockPost.title}
       description={mockPost.body}
       thumbnail={mockPost.thumbnail}
+      section={mockPost.section}
     />
   )
 }
 
 export const NoDescription = () => {
-  return <NewsCard title={mockPost.title} />
+  return <NewsCard title={mockPost.title} section={mockPost.section} />
 }
 
 export const OnlyTitle = () => {
-  return <NewsContent title={mockPost.title} />
+  return <NewsContent title={mockPost.title} section={mockPost.section} />
 }
 
 export default {

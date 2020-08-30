@@ -6,7 +6,7 @@ import NewsContent from './NewsContent'
 import { NewsCardProps } from './types'
 
 function NewsCard(props: NewsCardProps) {
-  const { title, description, thumbnail } = props
+  const { title, description, thumbnail, section } = props
 
   return (
     <RatioBox>
@@ -18,7 +18,11 @@ function NewsCard(props: NewsCardProps) {
         )}
       </RatioBoxFloating>
       <FloatingContent>
-        <NewsContent title={title} description={description} />
+        <NewsContent
+          title={title}
+          description={description}
+          section={section}
+        />
       </FloatingContent>
     </RatioBox>
   )
