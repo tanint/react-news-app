@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'next/link'
 import styled from '@emotion/styled'
 
+import { SearchInput } from '@/components/SearchInput'
+
 const menuConfig = [
   {
     title: 'Sports',
@@ -36,7 +38,9 @@ function Navigation() {
             </Link>
           )
         })}
-        <SearchSection>Search</SearchSection>
+        <SearchSection>
+          <SearchInput onChange={(q) => console.log('q:', q)} />
+        </SearchSection>
       </Menu>
     </div>
   )
@@ -62,7 +66,10 @@ const Menu = styled.div`
 `
 
 const SearchSection = styled.div`
-  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding-left: 50px;
 `
 
 export default Navigation

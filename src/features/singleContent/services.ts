@@ -1,5 +1,7 @@
 import { get } from 'lodash'
 import sanitizeHtml from 'sanitize-html'
+import dayjs from 'dayjs'
+
 import { fetchAPI } from '@/lib/api'
 
 export const getSingleContent = async (contentId) => {
@@ -13,7 +15,9 @@ export const getSingleContent = async (contentId) => {
 
   return {
     title: get(data, 'response.content.webTitle'),
-    publicationDate: get(data, 'response.content.webPublicationDate'),
+    publicationDate: dayjs(
+      get(data, 'response.content.webPublicationDate'),
+    ).format('ddd D MMM YYYY hh.mm BST'),
     headline: get(data, 'response.content.fields.headline'),
     body: sanitizeContent(get(data, 'response.content.fields.body', '')),
   }
