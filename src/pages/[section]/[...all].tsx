@@ -27,7 +27,7 @@ function Content() {
         <div>Loading</div>
       ) : (
         <div css={{ position: 'relative', marginBottom: 'var(--space10)' }}>
-          <SeoTags title={data.title as string} />
+          <SeoTags title={data.title} />
           <div
             css={{
               borderBottom: '1px solid #EAEAEA',

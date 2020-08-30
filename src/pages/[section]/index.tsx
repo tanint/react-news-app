@@ -7,6 +7,7 @@ import { PageWrapper } from '@/lib/page'
 import { getTopStories } from '@/features/topStories'
 import { List } from '@/features/topStories'
 import { SeoTags } from '@/lib/Seo'
+import { SelectInput } from '@/components/SelectInput'
 
 function Section() {
   const { query } = useRouter()
@@ -27,7 +28,13 @@ function Section() {
   return (
     <PageWrapper>
       <SeoTags title={query.section as string} />
-      <div css={{ padding: 'var(--space6) 0' }}>
+      <div
+        css={{
+          padding: 'var(--space6) 0',
+          display: 'flex',
+          justifyContent: 'space-between',
+        }}
+      >
         <h1
           css={{
             fontFamily: 'Georgia,serif',
@@ -38,6 +45,24 @@ function Section() {
         >
           {query.section}
         </h1>
+        <div css={{ minWidth: '300px' }}>
+          <SelectInput
+            initialValue="newest"
+            onChange={(value) => {
+              console.log(value)
+            }}
+            options={[
+              {
+                label: 'Newest First',
+                value: 'newest',
+              },
+              {
+                label: 'Oldest First',
+                value: 'oldest',
+              },
+            ]}
+          />
+        </div>
       </div>
       <div>
         {status === 'loading' ? <div>Loading...</div> : <List posts={posts} />}
