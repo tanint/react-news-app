@@ -1,5 +1,5 @@
 import { get } from 'lodash'
-import { useQuery } from 'react-query'
+import { useQuery, useInfiniteQuery } from 'react-query'
 
 import { fetchAPI } from '@/lib/api'
 
@@ -39,6 +39,33 @@ export const getContents = async (
   }
 }
 
-export function useQueryContents(section, options: OptionsType) {
+export const useQueryContents = (section, options: OptionsType) => {
   return useQuery([section, options], getContents)
+}
+
+export const useInfiniteQueryContents = (
+  section,
+  options: OptionsType,
+  config = {},
+) => {
+  return useInfiniteQuery({
+    queryKey: [
+      section,
+      {
+        limit: 9,
+        orderBy: options.orderBy,
+      },
+    ],
+    queryFn: getContents,
+    config: {
+      ...config,
+      getFetchMore: (lastGroup) => {
+        const nextPage = lastGroup.currentPage + 1
+
+        if (nextPage > lastGroup.pages) return false
+
+        return nextPage
+      },
+    },
+  })
 }

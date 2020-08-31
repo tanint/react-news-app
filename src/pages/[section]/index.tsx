@@ -1,10 +1,9 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { isEmpty } from 'lodash'
-import { useInfiniteQuery } from 'react-query'
 
 import { PageWrapper } from '@/lib/page'
-import { getContents, LoadMore } from '@/features/contents'
+import { LoadMore, useInfiniteQueryContents } from '@/features/contents'
 import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
@@ -19,26 +18,11 @@ function Section() {
     status,
     fetchMore,
     isFetchingMore,
-  } = useInfiniteQuery({
-    queryKey: [
-      query.section,
-      {
-        limit: 9,
-        orderBy,
-      },
-    ],
-    queryFn: getContents,
-    config: {
-      enabled: !isEmpty(query),
-      getFetchMore: (lastGroup) => {
-        const nextPage = lastGroup.currentPage + 1
-
-        if (nextPage > lastGroup.pages) return false
-
-        return nextPage
-      },
-    },
-  })
+  } = useInfiniteQueryContents(
+    query.section,
+    { orderBy },
+    { enabled: !isEmpty(query) },
+  )
 
   return (
     <PageWrapper>
