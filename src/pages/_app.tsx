@@ -9,6 +9,7 @@ import { ThemeProvider } from '@/styles/ThemeProvider'
 const queryConfig = {
   queries: {
     refetchOnWindowFocus: false,
+    cacheTime: 1 * 60 * 1000,
   },
 }
 

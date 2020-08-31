@@ -12,6 +12,7 @@ function List(props) {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gap: 'var(--space6)',
+        marginBottom: 'var(--space6)',
       }}
     >
       {posts.map((post) => (

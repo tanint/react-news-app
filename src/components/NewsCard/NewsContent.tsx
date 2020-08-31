@@ -5,7 +5,7 @@ import { NewsContentProps } from './types'
 
 function NewsContent(props: NewsContentProps) {
   const { title, description, section } = props
-  console.log('section', section)
+
   return (
     <Content className={section}>
       <Title>{title}</Title>

@@ -1,33 +1,46 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { useQuery } from 'react-query'
 import { isEmpty } from 'lodash'
+import { useInfiniteQuery } from 'react-query'
 
 import { PageWrapper } from '@/lib/page'
-import { getTopStories } from '@/features/topStories'
-import { List } from '@/features/topStories'
+import { getContents, LoadMore } from '@/features/contents'
+import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
 
 function Section() {
   const { query } = useRouter()
 
-  const { data: posts, status } = useQuery({
+  const {
+    canFetchMore,
+    data,
+    status,
+    fetchMore,
+    isFetchingMore,
+  } = useInfiniteQuery({
     queryKey: [
       query.section,
       {
         limit: 9,
       },
     ],
-    queryFn: getTopStories,
+    queryFn: getContents,
     config: {
       enabled: !isEmpty(query),
+      getFetchMore: (lastGroup) => {
+        const nextPage = lastGroup.currentPage + 1
+
+        if (nextPage > lastGroup.pages) return false
+
+        return nextPage
+      },
     },
   })
 
   return (
     <PageWrapper>
-      <SeoTags title={query.section as string} />
+      <SeoTags title={query.section} />
       <div
         css={{
           padding: 'var(--space6) 0',
@@ -65,8 +78,23 @@ function Section() {
         </div>
       </div>
       <div>
-        {status === 'loading' ? <div>Loading...</div> : <List posts={posts} />}
+        {status !== 'success' ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            {data.map((group) => {
+              return <List key={group.currentPage} posts={group.results} />
+            })}
+          </div>
+        )}
       </div>
+      {canFetchMore && (
+        <div css={{ display: 'flex', justifyContent: 'center' }}>
+          <LoadMore isLoading={!!isFetchingMore} onClick={() => fetchMore()}>
+            {!!isFetchingMore ? 'Loading' : 'Load more'}
+          </LoadMore>
+        </div>
+      )}
     </PageWrapper>
   )
 }
