@@ -91,10 +91,7 @@ const ContentBox = styled.div`
   }
 
   figure.element {
-    max-width: 40%;
-    position: absolute;
-    right: 0;
-    padding-left: var(--space4);
+    margin-bottom: var(--space4);
   }
 
   figcaption {
