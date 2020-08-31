@@ -11,6 +11,7 @@ import { SelectInput } from '@/components/SelectInput'
 
 function Section() {
   const { query } = useRouter()
+  const [orderBy, setOrderBy] = React.useState('newest')
 
   const {
     canFetchMore,
@@ -23,6 +24,7 @@ function Section() {
       query.section,
       {
         limit: 9,
+        orderBy,
       },
     ],
     queryFn: getContents,
@@ -60,9 +62,9 @@ function Section() {
         </h1>
         <div css={{ minWidth: '300px' }}>
           <SelectInput
-            initialValue="newest"
+            initialValue={orderBy}
             onChange={(value) => {
-              console.log(value)
+              setOrderBy(value)
             }}
             options={[
               {

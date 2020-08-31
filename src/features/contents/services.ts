@@ -4,16 +4,24 @@ import { useQuery } from 'react-query'
 import { fetchAPI } from '@/lib/api'
 
 type OptionsType = {
-  limit: number
+  limit?: number
+  orderBy?: string
 }
 
-export const getContents = async (section, options: OptionsType, page = 1) => {
+export const getContents = async (
+  section: string,
+  options: OptionsType,
+  page = 1,
+) => {
+  const { orderBy = 'newest', limit = 9 } = options
+
   const { data } = await fetchAPI({
     path: '/search',
     params: {
       section,
       page,
-      'page-size': options.limit,
+      'page-size': limit,
+      'order-by': orderBy,
       'show-fields': 'bodyText,thumbnail',
     },
   })
