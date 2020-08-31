@@ -1,5 +1,6 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import styled from '@emotion/styled'
+import { useInView } from 'react-intersection-observer'
 
 type LoadmoreProps = {
   isLoading: boolean
@@ -8,6 +9,9 @@ type LoadmoreProps = {
 
 function LoadMore(props: LoadmoreProps & { children: ReactNode }) {
   const { isLoading, onClick } = props
+  const [ref, inView] = useInView({
+    rootMargin: '0px 0px 300px 0px',
+  })
 
   const handleClick = () => {
     if (!isLoading) {
@@ -15,8 +19,14 @@ function LoadMore(props: LoadmoreProps & { children: ReactNode }) {
     }
   }
 
+  useEffect(() => {
+    if (inView) {
+      onClick()
+    }
+  }, [inView])
+
   return (
-    <ButtonStyled isLoading={isLoading} onClick={handleClick}>
+    <ButtonStyled isLoading={isLoading} onClick={handleClick} ref={ref}>
       {props.children}
     </ButtonStyled>
   )

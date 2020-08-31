@@ -81,7 +81,9 @@ function Section() {
       </div>
       <div>
         {status !== 'success' ? (
-          <div>Loading...</div>
+          <div css={{ minHeight: '600px', textAlign: 'center' }}>
+            Loading...
+          </div>
         ) : (
           <div>
             {data.map((group) => {

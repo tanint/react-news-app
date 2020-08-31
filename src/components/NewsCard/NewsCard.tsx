@@ -2,7 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 import NewsContent from './NewsContent'
-
 import { NewsCardProps } from './types'
 
 function NewsCard(props: NewsCardProps) {
