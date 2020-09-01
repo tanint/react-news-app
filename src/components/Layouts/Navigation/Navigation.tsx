@@ -1,6 +1,8 @@
 import React from 'react'
+
 import Link from 'next/link'
 import styled from '@emotion/styled'
+import { useRouter } from 'next/router'
 
 import { SearchInput } from '@/components/SearchInput'
 
@@ -39,10 +41,26 @@ function Navigation() {
           )
         })}
         <SearchSection>
-          <SearchInput onChange={(q) => console.log('q:', q)} />
+          <SearchContainer />
         </SearchSection>
       </Menu>
     </div>
+  )
+}
+
+const SearchContainer = () => {
+  const router = useRouter()
+  const isOpen = !!router.query.q && router.route === '/search'
+
+  return (
+    <SearchInput
+      isOpen={isOpen}
+      onChange={(q) => {
+        const href = ['/search', ...(q && [`?q=${q}`])].join('')
+
+        router.replace(href)
+      }}
+    />
   )
 }
 

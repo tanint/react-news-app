@@ -4,7 +4,6 @@ import { isEmpty } from 'lodash'
 import { useQuery } from 'react-query'
 import styled from '@emotion/styled'
 
-import { PageWrapper } from '@/lib/page'
 import { getSingleContent } from '@/features/singleContent'
 import { SeoTags } from '@/lib/Seo'
 import { BookmarkButton } from '@/components/BookmarkButton'
@@ -22,7 +21,7 @@ function Content() {
   const isLoading = status !== 'success'
 
   return (
-    <PageWrapper>
+    <div>
       {isLoading ? (
         <div>Loading</div>
       ) : (
@@ -76,7 +75,7 @@ function Content() {
           <ContentBox dangerouslySetInnerHTML={{ __html: data.body }} />
         </div>
       )}
-    </PageWrapper>
+    </div>
   )
 }
 

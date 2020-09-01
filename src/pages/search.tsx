@@ -7,7 +7,7 @@ import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
 
-function Section() {
+function Search() {
   const { query } = useRouter()
   const [orderBy, setOrderBy] = React.useState('newest')
 
@@ -18,14 +18,17 @@ function Section() {
     fetchMore,
     isFetchingMore,
   } = useInfiniteQueryContents(
-    query.section,
-    { orderBy },
+    '',
+    {
+      orderBy,
+      q: query.q as string,
+    },
     { enabled: !isEmpty(query) },
   )
 
   return (
     <div>
-      <SeoTags title={query.section} />
+      <SeoTags title={`Search: ${query.q}`} />
       <div
         css={{
           padding: 'var(--space6) 0',
@@ -41,7 +44,7 @@ function Section() {
             fontWeight: 700,
           }}
         >
-          {query.section}
+          Search result
         </h1>
         <div css={{ minWidth: '300px' }}>
           <SelectInput
@@ -86,4 +89,4 @@ function Section() {
   )
 }
 
-export default Section
+export default Search

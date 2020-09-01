@@ -5,6 +5,7 @@ import { ReactQueryConfigProvider } from 'react-query'
 
 import { ErrorProvider } from '@/lib/error'
 import { ThemeProvider } from '@/styles/ThemeProvider'
+import { MainLayout } from '@/components/Layouts'
 
 const queryConfig = {
   queries: {
@@ -20,7 +21,9 @@ function MyApp(props: AppProps) {
     <ReactQueryConfigProvider config={queryConfig}>
       <ThemeProvider>
         <ErrorProvider>
-          <Component {...pageProps} />
+          <MainLayout>
+            <Component {...pageProps} />
+          </MainLayout>
         </ErrorProvider>
       </ThemeProvider>
       <ReactQueryDevtools />

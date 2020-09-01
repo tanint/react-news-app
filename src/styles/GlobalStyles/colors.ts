@@ -2,9 +2,9 @@ import { css } from '@emotion/core'
 
 export default css`
   :root {
-    --color-primary-light: #1b3f83;
+    --color-primary-light: #134390;
     --color-primary: #0f3674;
-    --color-primary-dark: #174eb6;
+    --color-primary-dark: #0e326c;
 
     --color-gray-light: #f7f7f7;
     --color-gray: #f0f0f0;

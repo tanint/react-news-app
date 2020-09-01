@@ -1,17 +1,16 @@
 import React from 'react'
 
-import { PageWrapper } from '@/lib/page'
 import { useQueryContents } from '@/features/contents'
 import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 
 function Home() {
-  const { data, status } = useQueryContents('news', {
+  const { data, status } = useQueryContents('world', {
     limit: 8,
   })
 
   return (
-    <PageWrapper>
+    <div>
       <SeoTags title="Home" />
 
       <div>
@@ -21,7 +20,7 @@ function Home() {
           <List posts={data.results} />
         )}
       </div>
-    </PageWrapper>
+    </div>
   )
 }
 

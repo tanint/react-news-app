@@ -19,7 +19,8 @@ const Content = styled.div`
   padding: var(--space4);
   border-bottom: 3px solid var(--color-primary);
 
-  &.news {
+  &.news,
+  &.world {
     border-color: var(--color-news);
   }
   &.sport {

@@ -6,23 +6,25 @@ import { fetchAPI } from '@/lib/api'
 type OptionsType = {
   limit?: number
   orderBy?: string
+  q?: string
 }
 
 export const getContents = async (
-  section: string,
-  options: OptionsType,
+  section?: string,
+  options?: OptionsType,
   page = 1,
 ) => {
-  const { orderBy = 'newest', limit = 9 } = options
+  const { orderBy = 'newest', limit = 9, q } = options
 
   const { data } = await fetchAPI({
     path: '/search',
     params: {
-      section,
       page,
       'page-size': limit,
       'order-by': orderBy,
       'show-fields': 'bodyText,thumbnail',
+      ...(section && { section }),
+      ...(q && { q }),
     },
   })
 
@@ -53,7 +55,7 @@ export const useInfiniteQueryContents = (
       section,
       {
         limit: 9,
-        orderBy: options.orderBy,
+        ...options,
       },
     ],
     queryFn: getContents,
