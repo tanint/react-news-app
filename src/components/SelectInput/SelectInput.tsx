@@ -67,7 +67,7 @@ type InputProps = {
 }
 
 const Input = styled.div(({ isOpen }: InputProps) => ({
-  padding: 'var(--space3)',
+  padding: '8px var(--space3)',
   borderBottom: '1px solid #949494',
   cursor: 'pointer',
   userSelect: 'none',

@@ -6,6 +6,7 @@ import { SearchInput } from '@/components/SearchInput'
 
 const SearchContainer = () => {
   const router = useRouter()
+  const keywordQuery = router.query.q
   const [keyword, setKeyword] = React.useState('')
 
   const delayRouteToSearch = useCallback(
@@ -16,15 +17,20 @@ const SearchContainer = () => {
   )
 
   useEffect(() => {
+    if (keywordQuery) {
+      setKeyword(keywordQuery as string)
+    }
+
     if (router.route !== '/search') {
       setKeyword('')
     }
-  }, [router.route])
+  }, [router.route, keywordQuery])
 
   const isOpenInput = !!keyword || router.route === '/search'
 
   return (
     <SearchInput
+      css={{ maxWidth: '250px' }}
       isOpen={isOpenInput}
       value={keyword}
       onChange={(q) => {

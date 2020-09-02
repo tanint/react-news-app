@@ -7,6 +7,7 @@ import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
 import { Loading } from '@/components/Loading'
+import { BookmarkButton } from '@/components/BookmarkButton'
 
 function Section() {
   const { query } = useRouter()
@@ -44,23 +45,28 @@ function Section() {
         >
           {query.section}
         </h1>
-        <div css={{ minWidth: '300px' }}>
-          <SelectInput
-            initialValue={orderBy}
-            onChange={(value) => {
-              setOrderBy(value)
-            }}
-            options={[
-              {
-                label: 'Newest First',
-                value: 'newest',
-              },
-              {
-                label: 'Oldest First',
-                value: 'oldest',
-              },
-            ]}
-          />
+        <div css={{ display: 'flex', alignItems: 'center' }}>
+          <div css={{ marginRight: 'var(--space6)' }}>
+            <BookmarkButton />
+          </div>
+          <div css={{ minWidth: '250px' }}>
+            <SelectInput
+              initialValue={orderBy}
+              onChange={(value) => {
+                setOrderBy(value)
+              }}
+              options={[
+                {
+                  label: 'Newest First',
+                  value: 'newest',
+                },
+                {
+                  label: 'Oldest First',
+                  value: 'oldest',
+                },
+              ]}
+            />
+          </div>
         </div>
       </div>
       <div>

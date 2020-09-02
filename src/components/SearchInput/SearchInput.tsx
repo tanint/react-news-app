@@ -14,10 +14,11 @@ interface SearchInputProps {
   onChange: (q: string) => void
   isOpen?: boolean
   value?: string
+  className?: string
 }
 
 const SearchInput = (props: SearchInputProps) => {
-  const { value, onChange, isOpen = false } = props
+  const { value, onChange, isOpen = false, className } = props
   const [isExpanded, setExpanded] = useState(isOpen)
 
   const $wrapperRef = useRef()
@@ -39,7 +40,7 @@ const SearchInput = (props: SearchInputProps) => {
   }, [isOpen])
 
   return (
-    <Wrapper isExpanded={isExpanded} ref={$wrapperRef}>
+    <Wrapper className={className} isExpanded={isExpanded} ref={$wrapperRef}>
       <Control>
         <SearchButton onClick={() => setExpanded(true)}>
           <SearchIcon />

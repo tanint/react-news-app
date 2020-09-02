@@ -62,7 +62,6 @@ const SearchSection = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  padding-left: 50px;
 `
 
 export default Navigation
