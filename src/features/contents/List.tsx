@@ -30,8 +30,8 @@ function List(props) {
       css={{
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
-        gap: 'var(--space6)',
-        marginBottom: 'var(--space6)',
+        gap: 'var(--space8)',
+        marginBottom: 'var(--space8)',
       }}
     >
       {posts.map((post) => (

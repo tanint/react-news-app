@@ -7,6 +7,7 @@ import styled from '@emotion/styled'
 import { getSingleContent } from '@/features/singleContent'
 import { SeoTags } from '@/lib/Seo'
 import { BookmarkButton } from '@/components/BookmarkButton'
+import { Loading } from '@/components/Loading'
 
 function Content() {
   const { asPath, query } = useRouter()
@@ -23,7 +24,7 @@ function Content() {
   return (
     <div>
       {isLoading ? (
-        <div>Loading</div>
+        <Loading />
       ) : (
         <div css={{ position: 'relative', marginBottom: 'var(--space10)' }}>
           <SeoTags title={data.title} />
