@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { isEmpty } from 'lodash'
 
 import { LoadMore, useInfiniteQueryContents } from '@/features/contents'
 import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
+import { Loading } from '@/components/Loading'
 
 function Search() {
   const { query } = useRouter()
@@ -17,18 +17,14 @@ function Search() {
     status,
     fetchMore,
     isFetchingMore,
-  } = useInfiniteQueryContents(
-    '',
-    {
-      orderBy,
-      q: query.q as string,
-    },
-    { enabled: !isEmpty(query) },
-  )
+  } = useInfiniteQueryContents('', {
+    orderBy,
+    q: query.q as string,
+  })
 
   return (
     <div>
-      <SeoTags title={`Search: ${query.q}`} />
+      <SeoTags title={`Search: ${query.q || ' Not Found'}`} />
       <div
         css={{
           padding: 'var(--space6) 0',
@@ -67,9 +63,7 @@ function Search() {
       </div>
       <div>
         {status !== 'success' ? (
-          <div css={{ minHeight: '600px', textAlign: 'center' }}>
-            Loading...
-          </div>
+          <Loading />
         ) : (
           <div>
             {data.map((group) => {

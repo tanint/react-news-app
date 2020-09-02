@@ -6,6 +6,7 @@ import { LoadMore, useInfiniteQueryContents } from '@/features/contents'
 import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
+import { Loading } from '@/components/Loading'
 
 function Section() {
   const { query } = useRouter()
@@ -64,9 +65,7 @@ function Section() {
       </div>
       <div>
         {status !== 'success' ? (
-          <div css={{ minHeight: '600px', textAlign: 'center' }}>
-            Loading...
-          </div>
+          <Loading />
         ) : (
           <div>
             {data.map((group) => {

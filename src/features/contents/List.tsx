@@ -1,10 +1,29 @@
 import React from 'react'
 import Link from 'next/link'
+import { isEmpty } from 'lodash'
 
 import { NewsCard } from '@/components/NewsCard'
 
 function List(props) {
   const { posts = [] } = props
+
+  if (isEmpty(posts)) {
+    return (
+      <div
+        css={{
+          minHeight: '300px',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '22px',
+          fontWeight: 700,
+        }}
+      >
+        Not Found
+      </div>
+    )
+  }
 
   return (
     <div

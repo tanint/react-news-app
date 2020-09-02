@@ -1,10 +1,8 @@
 import React from 'react'
-
 import Link from 'next/link'
 import styled from '@emotion/styled'
-import { useRouter } from 'next/router'
 
-import { SearchInput } from '@/components/SearchInput'
+import { SearchContainer } from '@/features/search'
 
 const menuConfig = [
   {
@@ -23,44 +21,21 @@ const menuConfig = [
 
 function Navigation() {
   return (
-    <div>
-      <Menu>
-        <Link href="/" passHref>
-          <LinkItem slug="news">News Today</LinkItem>
-        </Link>
-        {menuConfig.map((menu) => {
-          return (
-            <Link
-              key={menu.slug}
-              href="/[section]"
-              as={`/${menu.slug}`}
-              passHref
-            >
-              <LinkItem slug={menu.slug}>{menu.title}</LinkItem>
-            </Link>
-          )
-        })}
-        <SearchSection>
-          <SearchContainer />
-        </SearchSection>
-      </Menu>
-    </div>
-  )
-}
-
-const SearchContainer = () => {
-  const router = useRouter()
-  const isOpen = !!router.query.q && router.route === '/search'
-
-  return (
-    <SearchInput
-      isOpen={isOpen}
-      onChange={(q) => {
-        const href = ['/search', ...(q && [`?q=${q}`])].join('')
-
-        router.replace(href)
-      }}
-    />
+    <Menu>
+      <Link href="/" passHref>
+        <LinkItem slug="news">News Today</LinkItem>
+      </Link>
+      {menuConfig.map((menu) => {
+        return (
+          <Link key={menu.slug} href="/[section]" as={`/${menu.slug}`} passHref>
+            <LinkItem slug={menu.slug}>{menu.title}</LinkItem>
+          </Link>
+        )
+      })}
+      <SearchSection>
+        <SearchContainer />
+      </SearchSection>
+    </Menu>
   )
 }
 

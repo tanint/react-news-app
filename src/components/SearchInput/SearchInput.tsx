@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useCallback, useState } from 'react'
-import { debounce } from 'lodash'
+import React, { useEffect, useRef, useState } from 'react'
 
 import { useOnClickOutside } from '@/lib/hooks'
 
@@ -14,27 +13,21 @@ import {
 interface SearchInputProps {
   onChange: (q: string) => void
   isOpen?: boolean
+  value?: string
 }
 
 const SearchInput = (props: SearchInputProps) => {
-  const { onChange, isOpen = false } = props
+  const { value, onChange, isOpen = false } = props
   const [isExpanded, setExpanded] = useState(isOpen)
 
   const $wrapperRef = useRef()
 
-  const delayedQuery = useCallback(
-    debounce((q) => {
-      onChange(q)
-    }, 300),
-    [],
-  )
-
   const onChangeInput = (e) => {
-    delayedQuery(e.target.value)
+    onChange(e.target.value)
   }
 
   useOnClickOutside($wrapperRef, () => {
-    if (isOpen) return
+    if (value) return
 
     if (isExpanded) {
       setExpanded(false)
@@ -54,6 +47,7 @@ const SearchInput = (props: SearchInputProps) => {
         {isExpanded && (
           <InputBox>
             <Input
+              value={value}
               placeholder="Search all news"
               onChange={onChangeInput}
               autoFocus
