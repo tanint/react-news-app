@@ -9,9 +9,6 @@ export const Overview = () => {
         <BookmarkButton />
       </div>
       <div>
-        <BookmarkButton isActive />
-      </div>
-      <div>
         <BookmarkButton text="Custom Text" />
       </div>
     </div>

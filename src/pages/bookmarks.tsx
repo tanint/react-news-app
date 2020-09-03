@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { SeoTags } from '@/lib/Seo'
 import { SelectInput } from '@/components/SelectInput'
 import { PageHeader } from '@/components/Layouts/PageHeader'
 
-function Bookmarks() {
-  const [orderBy, setOrderBy] = React.useState('newest')
+import { useLocalBookmarks } from '@/features/bookmarks'
+import { List } from '@/features/contents'
 
+function Bookmarks() {
+  const [orderBy, setOrderBy] = useState('newest')
+  const { bookmarks } = useLocalBookmarks()
   const section = 'All bookmark'
 
   return (
@@ -33,6 +36,9 @@ function Bookmarks() {
           />
         )}
       />
+      <div>
+        <List posts={bookmarks} />
+      </div>
     </div>
   )
 }

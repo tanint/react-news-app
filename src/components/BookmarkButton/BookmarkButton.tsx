@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-import { BookmarkOffIcon, BookmarkIcon } from './BookmarkIcon'
+import { BookmarkIcon } from './BookmarkIcon'
 interface BookmarkButtonProps {
   text?: string
-  isActive?: boolean
+  onClick?: () => void
 }
 
 function BookmarkButton(props: BookmarkButtonProps) {
-  const { text = 'View Bookmark', isActive = false } = props
+  const { text = 'View Bookmark', onClick } = props
 
   return (
-    <BookmarkStyled>
-      {isActive ? <BookmarkOffIcon /> : <BookmarkIcon />}
+    <BookmarkStyled onClick={onClick}>
+      <BookmarkIcon />
       <span css={{ marginLeft: 'var(--space2)' }}>{text}</span>
     </BookmarkStyled>
   )
@@ -29,6 +29,7 @@ const BookmarkStyled = styled.div`
   font-size: 14px;
   display: inline-flex;
   align-items: center;
+  user-select: none;
   cursor: pointer;
 
   &:hover {

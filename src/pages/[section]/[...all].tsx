@@ -4,10 +4,11 @@ import { isEmpty } from 'lodash'
 import { useQuery } from 'react-query'
 import styled from '@emotion/styled'
 
-import { getSingleContent } from '@/features/singleContent'
 import { SeoTags } from '@/lib/Seo'
-import { BookmarkButton } from '@/components/BookmarkButton'
 import { Loading } from '@/components/Loading'
+
+import { getSingleContent } from '@/features/singleContent'
+import { BookmarkButton } from '@/features/bookmarks'
 
 function Content() {
   const { asPath, query } = useRouter()
@@ -39,7 +40,7 @@ function Content() {
             }}
           >
             <div>
-              <BookmarkButton />
+              <BookmarkButton article={data} />
             </div>
             <div
               css={{

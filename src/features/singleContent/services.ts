@@ -8,13 +8,16 @@ export const getSingleContent = async (contentId) => {
   const { data } = await fetchAPI({
     path: `/${contentId}`,
     params: {
-      'show-fields': 'body,headline',
+      'show-fields': 'body,headline,thumbnail',
       shouldHideAdverts: 'true',
     },
   })
 
   return {
+    id: get(data, 'response.content.id'),
     title: get(data, 'response.content.webTitle'),
+    thumbnail: get(data, 'response.content.fields.thumbnail'),
+    section: get(data, 'response.content.sectionId'),
     publicationDate: dayjs(
       get(data, 'response.content.webPublicationDate'),
     ).format('ddd D MMM YYYY hh.mm BST'),
