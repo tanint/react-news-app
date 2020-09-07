@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 
 import { SearchContainer } from '@/features/search'
 
-const menuConfig = [
+export const sectionConfig = [
   {
     title: 'Sports',
     slug: 'sport',
@@ -19,13 +19,13 @@ const menuConfig = [
   },
 ]
 
-function Navigation() {
+export const Navigation = () => {
   return (
     <Menu>
       <Link href="/" passHref>
         <LinkItem slug="news">News Today</LinkItem>
       </Link>
-      {menuConfig.map((menu) => {
+      {sectionConfig.map((menu) => {
         return (
           <Link key={menu.slug} href="/[section]" as={`/${menu.slug}`} passHref>
             <LinkItem slug={menu.slug}>{menu.title}</LinkItem>
@@ -63,5 +63,3 @@ const SearchSection = styled.div`
   justify-content: flex-end;
   width: 100%;
 `
-
-export default Navigation

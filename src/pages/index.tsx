@@ -1,18 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 
-import { useQueryContents } from '@/features/contents'
-import { List } from '@/features/contents'
 import { SeoTags } from '@/lib/Seo'
 import { BookmarkButton } from '@/components/BookmarkButton'
 import { PageHeader } from '@/components/Layouts/PageHeader'
 import { SelectInput } from '@/components/SelectInput'
+import { TopStories, CategorySection } from '@/features/topStories'
+import { sectionConfig } from '@/components/Layouts/Navigation'
 
 function Home() {
-  const [orderBy, setOrderBy] = React.useState('newest')
-  const { data, status } = useQueryContents('world', {
-    limit: 8,
-  })
+  const [orderBy, setOrderBy] = useState('newest')
 
   return (
     <div>
@@ -45,13 +42,14 @@ function Home() {
           />
         )}
       />
-      <div>
-        {status === 'loading' ? (
-          <div>Loading...</div>
-        ) : (
-          <List posts={data.results} />
-        )}
-      </div>
+      <TopStories orderBy={orderBy} />
+      {sectionConfig.map((section) => (
+        <CategorySection
+          key={section.slug}
+          section={section}
+          orderBy={orderBy}
+        />
+      ))}
     </div>
   )
 }
