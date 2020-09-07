@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { isEmpty } from 'lodash'
 import Link from 'next/link'
@@ -12,8 +12,10 @@ import { BookmarkButton } from '@/components/BookmarkButton'
 import { PageHeader } from '@/components/Layouts/PageHeader'
 
 function Section() {
-  const { query } = useRouter()
-  const [orderBy, setOrderBy] = React.useState('newest')
+  const router = useRouter()
+  const initialSorting = 'newest'
+  const [orderBy, setOrderBy] = useState(initialSorting)
+  const { query, asPath } = router
 
   const {
     canFetchMore,
@@ -26,6 +28,12 @@ function Section() {
     { orderBy },
     { enabled: !isEmpty(query) },
   )
+
+  useEffect(() => {
+    if (orderBy !== initialSorting) {
+      setOrderBy(initialSorting)
+    }
+  }, [asPath])
 
   const section = query.section as string
 
@@ -43,6 +51,7 @@ function Section() {
         )}
         renderSorting={() => (
           <SelectInput
+            enableReinitialize
             initialValue={orderBy}
             onChange={(value) => {
               setOrderBy(value)

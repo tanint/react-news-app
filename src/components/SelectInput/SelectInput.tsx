@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { find } from 'lodash'
 import styled from '@emotion/styled'
 
@@ -13,17 +13,17 @@ interface SelectInputProps {
   onChange: (value: string) => void
   initialValue: string
   isOpen?: boolean
+  enableReinitialize?: boolean
 }
 
 function SelectInput(props: SelectInputProps) {
-  const { options, initialValue, onChange } = props
+  const { options, initialValue, onChange, enableReinitialize = false } = props
   const containerRef = useRef()
   const optionsRef = useRef()
+  const activeOptionValue = find(options, (o) => o.value === initialValue)
 
   const [isOpen, setOpen] = useState(props.isOpen || false)
-  const [activeOption, setActiveOption] = useState(
-    find(options, (o) => o.value === initialValue),
-  )
+  const [activeOption, setActiveOption] = useState(activeOptionValue)
 
   useOnClickOutside(
     containerRef,
@@ -34,6 +34,12 @@ function SelectInput(props: SelectInputProps) {
     },
     [optionsRef],
   )
+
+  useEffect(() => {
+    if (enableReinitialize) {
+      setActiveOption(activeOptionValue)
+    }
+  }, [enableReinitialize, initialValue])
 
   return (
     <Wrapper ref={containerRef}>
