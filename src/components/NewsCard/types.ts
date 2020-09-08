@@ -6,4 +6,5 @@ export type NewsContentProps = {
 
 export type NewsCardProps = {
   thumbnail?: string
+  ratio?: number
 } & NewsContentProps

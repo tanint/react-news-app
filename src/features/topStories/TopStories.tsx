@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { useQueryContents } from '@/features/contents'
-import { List } from '@/features/contents'
-
+import { Loading } from '@/components/Loading'
+import { List } from './List'
 interface TopStoriesProps {
   orderBy: string
 }
@@ -17,11 +17,7 @@ function TopStories(props: TopStoriesProps) {
 
   return (
     <div>
-      {status === 'loading' ? (
-        <div>Loading...</div>
-      ) : (
-        <List posts={data.results} />
-      )}
+      {status === 'loading' ? <Loading /> : <List posts={data.results} />}
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { useQueryContents } from '@/features/contents'
 import { List } from '@/features/contents'
-
+import { Loading } from '@/components/Loading'
 interface CategorySectionProps {
   section: {
     slug: string
@@ -51,11 +51,7 @@ function CategorySection(props: CategorySectionProps) {
           </Link>
         </div>
       </div>
-      {status === 'loading' ? (
-        <div>Loading...</div>
-      ) : (
-        <List posts={data.results} />
-      )}
+      {status === 'loading' ? <Loading /> : <List posts={data.results} />}
     </div>
   )
 }

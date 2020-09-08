@@ -5,10 +5,10 @@ import NewsContent from './NewsContent'
 import { NewsCardProps } from './types'
 
 function NewsCard(props: NewsCardProps) {
-  const { title, description, thumbnail, section } = props
+  const { title, description, thumbnail, section, ratio = 1 } = props
 
   return (
-    <RatioBox>
+    <RatioBox ratio={ratio}>
       <RatioBoxFloating>
         {thumbnail ? (
           <Image src={thumbnail} />
@@ -27,10 +27,13 @@ function NewsCard(props: NewsCardProps) {
   )
 }
 
+type RatioBoxType = { ratio: number }
+
 const RatioBox = styled.div`
   position: relative;
   width: 100%;
-  padding-top: 100%;
+  height: 100%;
+  padding-top: ${({ ratio }: RatioBoxType) => `${ratio * 100}%`};
 `
 
 const RatioBoxFloating = styled.div`

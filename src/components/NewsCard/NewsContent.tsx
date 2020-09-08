@@ -8,7 +8,7 @@ function NewsContent(props: NewsContentProps) {
 
   return (
     <Content className={section}>
-      <Title>{title}</Title>
+      <Title desc={description}>{title}</Title>
       {description && <Desc>{description}</Desc>}
     </Content>
   )
@@ -17,7 +17,9 @@ function NewsContent(props: NewsContentProps) {
 const Content = styled.div`
   background-color: rgba(9, 53, 123, 0.9);
   padding: var(--space4);
+  padding-bottom: var(--space3);
   border-bottom: 3px solid var(--color-primary);
+  height: 155px;
 
   &.news,
   &.world {
@@ -34,12 +36,16 @@ const Content = styled.div`
   }
 `
 
+type TitleProps = {
+  desc?: string
+}
+
 const Title = styled.h2`
   font-weight: 700;
   font-size: 20px;
   color: #fff;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: ${(props: TitleProps) => (!!props.desc ? 2 : 4)};
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.5;
@@ -48,7 +54,7 @@ const Title = styled.h2`
 const Desc = styled.p`
   color: #fff;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.3;
