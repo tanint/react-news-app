@@ -1,11 +1,13 @@
-import React, { Fragment, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
+
+import { MainLayout } from '@/components/Layouts'
 
 interface PageWrapperProps {
   children: ReactNode
 }
 
 function PageWrapper(props: PageWrapperProps) {
-  return <Fragment>{props.children}</Fragment>
+  return <MainLayout>{props.children}</MainLayout>
 }
 
 export default PageWrapper

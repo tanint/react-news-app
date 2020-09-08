@@ -19,6 +19,11 @@ export default function GlobalStyles() {
           max-width: var(--width-container);
           margin: 0 auto;
         }
+
+        body,
+        #__next {
+          min-height: 100vh;
+        }
       `}
     />
   )
