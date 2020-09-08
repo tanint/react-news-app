@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
+import { useTheme } from 'emotion-theming'
 
 import { SearchInput } from '@/components/SearchInput'
 
@@ -8,6 +9,7 @@ const SearchContainer = () => {
   const router = useRouter()
   const keywordQuery = router.query.q
   const [keyword, setKeyword] = React.useState('')
+  const { media } = useTheme()
 
   const delayRouteToSearch = useCallback(
     debounce((href) => {
@@ -30,7 +32,13 @@ const SearchContainer = () => {
 
   return (
     <SearchInput
-      css={{ maxWidth: '250px' }}
+      css={{
+        maxWidth: '100%',
+
+        [media.md]: {
+          maxWidth: '250px',
+        },
+      }}
       isOpen={isOpenInput}
       value={keyword}
       onChange={(q) => {

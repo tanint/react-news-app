@@ -1,11 +1,13 @@
 import React from 'react'
-import { NewsCard, NewsContent } from '@/components/NewsCard'
 import Link from 'next/link'
+import { useTheme } from 'emotion-theming'
+
+import { NewsCard, NewsContent } from '@/components/NewsCard'
 import { chunkByPattern } from './helpers'
 
 export const List = (props) => {
   const { posts } = props
-
+  const { media } = useTheme()
   const [posts1, posts2, posts3, posts4] = chunkByPattern(
     posts,
     '0|1,2|3,4|5,6,7',
@@ -16,13 +18,30 @@ export const List = (props) => {
       <div
         css={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: '1fr',
           gap: 'var(--space8)',
           marginBottom: 'var(--space8)',
           overflow: 'hidden',
+
+          [media.sm]: {
+            gridTemplateColumns: 'repeat(2, 1fr)',
+          },
+
+          [media.md]: {
+            gridTemplateColumns: 'repeat(4, 1fr)',
+          },
         }}
       >
-        <div css={{ gridArea: '1 / 1 / 3 / 3', maxHeight: '467px' }}>
+        <div
+          css={{
+            gridArea: '1',
+
+            [media.sm]: {
+              gridArea: '1 / 1 / 3 / 3',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+            },
+          }}
+        >
           <Link href="/[section]/[...all]" as={`/${posts1[0].id}`}>
             <a>
               <NewsCard
@@ -61,8 +80,12 @@ export const List = (props) => {
       <div
         css={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: '1fr',
           gap: 'var(--space8)',
+
+          [media.sm]: {
+            gridTemplateColumns: 'repeat(3, 1fr)',
+          },
         }}
       >
         {posts4.map((post4) => (

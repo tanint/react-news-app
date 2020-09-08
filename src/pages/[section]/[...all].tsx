@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { isEmpty } from 'lodash'
 import { useQuery } from 'react-query'
 import styled from '@emotion/styled'
+import { useTheme } from 'emotion-theming'
 
 import { SeoTags } from '@/lib/Seo'
 import { Loading } from '@/components/Loading'
@@ -19,6 +20,7 @@ function Content() {
       enabled: !isEmpty(query),
     },
   })
+  const { media } = useTheme()
 
   const isLoading = status !== 'success'
 
@@ -35,8 +37,12 @@ function Content() {
               padding: 'var(--space4) 0',
               display: 'grid',
               gap: 'var(--space4)',
-              maxWidth: '60%',
               margin: 'var(--space10) 0 var(--space4)',
+              maxWidth: '100%',
+
+              [media.md]: {
+                maxWidth: '60%',
+              },
             }}
           >
             <div>
@@ -54,9 +60,17 @@ function Content() {
             <h1
               css={{
                 fontFamily: 'Georgia,serif',
-                fontSize: '42px',
                 textTransform: 'capitalize',
                 fontWeight: 700,
+                fontSize: '28px',
+
+                [media.sm]: {
+                  fontSize: '34px',
+                },
+
+                [media.md]: {
+                  fontSize: '42px',
+                },
               }}
             >
               {data.title}
@@ -65,9 +79,13 @@ function Content() {
               <div
                 css={{
                   margin: '20px 0',
-                  fontSize: '22px',
                   fontWeight: 700,
                   fontFamily: 'Georgia,serif',
+                  fontSize: '18px',
+
+                  [media.md]: {
+                    fontSize: '22px',
+                  },
                 }}
               >
                 {data.headline}
@@ -81,25 +99,33 @@ function Content() {
   )
 }
 
-const ContentBox = styled.div`
-  & > * {
-    max-width: 60%;
-  }
+const ContentBox = styled.div(({ theme }) => {
+  const { media } = theme
 
-  p {
-    margin-bottom: var(--space6);
-    line-height: 1.4;
-  }
+  return {
+    '& > *': {
+      maxWidth: '100%',
 
-  figure.element {
-    margin-bottom: var(--space4);
-  }
+      [media.md]: {
+        maxWidth: '60%',
+      },
+    },
 
-  figcaption {
-    color: #909090;
-    font-size: 14px;
-    line-height: 1.4;
+    p: {
+      marginBottom: 'var(--space6)',
+      lineHeight: '1.4',
+    },
+
+    'figure.element': {
+      marginBottom: 'var(--space4)',
+    },
+
+    figcaption: {
+      color: '#909090',
+      fontSize: '14px',
+      lineHeight: '1.4',
+    },
   }
-`
+})
 
 export default Content

@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import styled from '@emotion/styled'
+import { useTheme, EmotionTheming } from 'emotion-theming'
 
 import { SearchContainer } from '@/features/search'
 
@@ -20,8 +21,19 @@ export const sectionConfig = [
 ]
 
 export const Navigation = () => {
+  const { media } = useTheme()
+
   return (
-    <Menu>
+    <div
+      css={{
+        display: 'flex',
+        flexDirection: 'column',
+
+        [media.md]: {
+          flexDirection: 'row',
+        },
+      }}
+    >
       <Link href="/" passHref>
         <LinkItem slug="news">News Today</LinkItem>
       </Link>
@@ -32,14 +44,26 @@ export const Navigation = () => {
           </Link>
         )
       })}
-      <SearchSection>
+      <div
+        css={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: '100%',
+
+          [media.md]: {
+            justifyContent: 'flex-end',
+          },
+        }}
+      >
         <SearchContainer />
-      </SearchSection>
-    </Menu>
+      </div>
+    </div>
   )
 }
 
-const LinkItem = styled.a(({ slug }: { slug: string }) => ({
+type LinkItemProps = { slug: string }
+
+const LinkItem = styled.a(({ slug }: LinkItemProps) => ({
   color: '#fff',
   textDecoration: 'none',
   borderBottom: `3px solid var(--color-${slug})`,
@@ -53,13 +77,3 @@ const LinkItem = styled.a(({ slug }: { slug: string }) => ({
     backgroundColor: 'var(--color-primary-light)',
   },
 }))
-
-const Menu = styled.div`
-  display: flex;
-`
-
-const SearchSection = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-`

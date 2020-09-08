@@ -14,12 +14,13 @@ const breakPointKeys = Object.keys(breakpoints)
 
 const theme = {
   breakpoints: breakPointKeys.map((key) => breakpoints[key]),
-  media: breakPointKeys.reduce((prev, bpKey) => {
-    return {
+  media: breakPointKeys.reduce(
+    (prev, bpKey) => ({
       ...prev,
       [bpKey]: mq(bpKey),
-    }
-  }, {}),
+    }),
+    {},
+  ),
 }
 
 export default theme

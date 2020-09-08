@@ -14,7 +14,7 @@ export const getContents = async (
   options?: OptionsType,
   page = 1,
 ) => {
-  const { orderBy = 'newest', limit = 9, q } = options
+  const { orderBy = 'newest', limit = 12, q } = options
 
   const { data } = await fetchAPI({
     path: '/search',
@@ -54,7 +54,7 @@ export const useInfiniteQueryContents = (
     queryKey: [
       section,
       {
-        limit: 9,
+        limit: 12,
         ...options,
       },
     ],

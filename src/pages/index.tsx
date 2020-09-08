@@ -13,7 +13,7 @@ function Home() {
 
   return (
     <div>
-      <SeoTags title="Home" />
+      <SeoTags title="The Peaks News" />
       <PageHeader
         title="Top stories"
         renderBookmark={() => (

@@ -1,11 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
 import { isEmpty } from 'lodash'
+import { useTheme } from 'emotion-theming'
 
 import { NewsCard } from '@/components/NewsCard'
 
 function List(props) {
   const { posts = [] } = props
+  const { media } = useTheme()
 
   if (isEmpty(posts)) {
     return (
@@ -29,9 +31,17 @@ function List(props) {
     <div
       css={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
         gap: 'var(--space8)',
         marginBottom: 'var(--space8)',
+        gridTemplateColumns: 'repeat(1, 1fr)',
+
+        [media.sm]: {
+          gridTemplateColumns: 'repeat(2, 1fr)',
+        },
+
+        [media.md]: {
+          gridTemplateColumns: 'repeat(3, 1fr)',
+        },
       }}
     >
       {posts.map((post) => (
